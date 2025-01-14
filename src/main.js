@@ -1,24 +1,14 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+const dbConnection = require('./db');
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+// Ahora puedes usar `dbConnection` para interactuar con la base de datos
+dbConnection.query('SELECT * FROM tu_tabla', (err, results) => {
+  if (err) {
+    console.error('Error ejecutando la consulta:', err.message);
+    return;
+  }
+  console.log('Resultados de la consulta:', results);
 
-setupCounter(document.querySelector('#counter'))
+
+// Cerrar la conexión
+dbConnection.end();
+});
